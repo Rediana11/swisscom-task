@@ -13,7 +13,7 @@ import java.util.List;
 @Setter
 @NoArgsConstructor
 @ToString
-@Document(collection = "service")
+@Document
 public class ResourceEntity {
 
     private String id;

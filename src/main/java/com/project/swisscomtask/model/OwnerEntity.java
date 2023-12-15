@@ -11,7 +11,7 @@ import org.springframework.data.mongodb.core.mapping.Document;
 @Setter
 @NoArgsConstructor
 @ToString
-@Document(collection = "service")
+@Document
 public class OwnerEntity {
 
     private String id;

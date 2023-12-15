@@ -1,31 +1,47 @@
 package com.project.swisscomtask.controller;
 
-import com.project.swisscomtask.model.ServiceEntity;
-import com.project.swisscomtask.repository.ServiceRepository;
+import com.project.swisscomtask.dto.ServiceDto;
+import com.project.swisscomtask.operation.ServiceOperation;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.ArrayList;
 import java.util.List;
 
 @CrossOrigin
 @RestController
-@RequestMapping("/services")
+@RequestMapping(ServiceURL.BASE)
 public class ServiceController {
 
-    private ServiceRepository serviceRepository;
+    private final ServiceOperation serviceOperation;
 
-    public ServiceController(ServiceRepository serviceRepository) {
-        this.serviceRepository = serviceRepository;
+    @Autowired
+    public ServiceController(ServiceOperation serviceOperation) {
+        this.serviceOperation = serviceOperation;
     }
 
-    @GetMapping("/all")
-    public ResponseEntity<List<ServiceEntity>> getAllServices() {
-        List<ServiceEntity> services = new ArrayList<>(serviceRepository.findAll());
+    @GetMapping(ServiceURL.DATA)
+    public ResponseEntity<List<ServiceDto>> getAllServices() {
+        List<ServiceDto> services = serviceOperation.getAllServices();
         if (services.isEmpty()) {
             return new ResponseEntity<>(HttpStatus.NO_CONTENT);
         }
         return new ResponseEntity<>(services, HttpStatus.OK);
+    }
+
+    @PostMapping
+    public ResponseEntity<ServiceDto> createService(@RequestBody ServiceDto serviceEntity) {
+        return ResponseEntity.ok().body(serviceOperation.createService(serviceEntity));
+    }
+
+    @PutMapping(ServiceURL.SERVICE_ID)
+    public ResponseEntity<ServiceDto> updateService(@PathVariable String id, @RequestBody ServiceDto updatedServiceEntity) {
+        return ResponseEntity.ok().body(serviceOperation.updateService(id, updatedServiceEntity));
+    }
+
+    @GetMapping(ServiceURL.SERVICE_ID)
+    public ResponseEntity<ServiceDto> getServiceById(@PathVariable String id) {
+        return ResponseEntity.ok().body(serviceOperation.getServiceById(id));
     }
 }
