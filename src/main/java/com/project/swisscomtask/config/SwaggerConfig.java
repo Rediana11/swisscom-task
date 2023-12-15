@@ -18,18 +18,12 @@ public class SwaggerConfig {
     @Value("${swisscom.openapi.dev-url}")
     private String devUrl;
 
-    @Value("${swisscom.openapi.prod-url}")
-    private String prodUrl;
 
     @Bean
     public OpenAPI myOpenAPI() {
         Server devServer = new Server();
         devServer.setUrl(devUrl);
         devServer.setDescription("Server URL in Development environment");
-
-        Server prodServer = new Server();
-        prodServer.setUrl(prodUrl);
-        prodServer.setDescription("Server URL in Production environment");
 
         Contact contact = new Contact();
         contact.setEmail("canajrediana@gmail.com");
@@ -45,6 +39,6 @@ public class SwaggerConfig {
                 .description("This API exposes endpoints to manage services.").termsOfService("https://www.swisscom.com/terms")
                 .license(mitLicense);
 
-        return new OpenAPI().info(info).servers(List.of(devServer, prodServer));
+        return new OpenAPI().info(info).servers(List.of(devServer));
     }
 }

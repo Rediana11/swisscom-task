@@ -23,9 +23,9 @@ public class ServiceOperationImpl implements ServiceOperation {
 
     private final ServiceRepository serviceRepository;
 
-    OwnerMapper ownerMapper = new OwnerMapperImpl();
-    ResourceMapper resourceMapper = new ResourceMapperImpl(ownerMapper);
-    ServiceMapper serviceMapper = new ServiceMapperImpl(resourceMapper);
+    private final OwnerMapper ownerMapper = new OwnerMapperImpl();
+    private final ResourceMapper resourceMapper = new ResourceMapperImpl(ownerMapper);
+    private final ServiceMapper serviceMapper = new ServiceMapperImpl(resourceMapper);
 
 
     @Autowired
@@ -36,7 +36,7 @@ public class ServiceOperationImpl implements ServiceOperation {
     @Override
     public List<ServiceDto> getAllServices() {
         List<ServiceEntity> serviceDtos = serviceRepository.findAll();
-        return serviceDtos.stream().map(e -> serviceMapper.toDto(e)).collect(Collectors.toList());
+        return serviceDtos.stream().map(serviceMapper::toDto).collect(Collectors.toList());
     }
 
     @Override
