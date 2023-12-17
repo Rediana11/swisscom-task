@@ -13,4 +13,6 @@ public interface ServiceOperation {
     ServiceDto updateService(String id, ServiceDto updatedServiceEntity);
 
     ServiceDto getServiceById(String id);
+
+    String decryptText(String text);
 }

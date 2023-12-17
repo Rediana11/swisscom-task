@@ -7,11 +7,9 @@ import java.util.List;
 
 @Setter
 @Getter
-public class ServiceDto {
+public class ServiceDto extends BaseDto {
 
     private String id;
-
-    private String criticalText;
 
     private List<ResourceDto> resources;
 

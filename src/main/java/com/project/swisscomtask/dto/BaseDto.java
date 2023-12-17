@@ -3,12 +3,10 @@ package com.project.swisscomtask.dto;
 import lombok.Getter;
 import lombok.Setter;
 
-import java.util.List;
-
 @Setter
 @Getter
-public class ResourceDto extends BaseDto {
+public class BaseDto {
 
-    private List<OwnerDto> owners;
+    private String criticalText;
 
 }

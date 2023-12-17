@@ -5,9 +5,7 @@ import lombok.Setter;
 
 @Setter
 @Getter
-public class OwnerDto {
-
-    private String criticalText;
+public class OwnerDto extends BaseDto {
 
     private String name;
 

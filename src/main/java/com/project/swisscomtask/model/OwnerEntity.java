@@ -5,18 +5,11 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.ToString;
 
-import org.springframework.data.mongodb.core.mapping.Document;
-
 @Getter
 @Setter
 @NoArgsConstructor
 @ToString
-@Document
-public class OwnerEntity {
-
-    private String id;
-
-    private String criticalText;
+public class OwnerEntity extends BaseEntity {
 
     private String name;
 

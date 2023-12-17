@@ -44,4 +44,10 @@ public class ServiceController {
     public ResponseEntity<ServiceDto> getServiceById(@PathVariable String id) {
         return ResponseEntity.ok().body(serviceOperation.getServiceById(id));
     }
+
+    @PostMapping(ServiceURL.DECRYPT)
+    public ResponseEntity<String> decryptText(@PathVariable String text) {
+        return ResponseEntity.ok().body(serviceOperation.decryptText(text));
+    }
+
 }
