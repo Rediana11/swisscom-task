@@ -8,4 +8,4 @@ Steps to set up and run the project:
 chmod +x run_script.sh
 
  # Run it 
-./run_application.sh
+./run_script.sh
