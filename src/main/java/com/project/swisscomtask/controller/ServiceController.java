@@ -9,7 +9,6 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
-@CrossOrigin
 @RestController
 @RequestMapping(ServiceURL.BASE)
 public class ServiceController {
@@ -45,7 +44,7 @@ public class ServiceController {
         return ResponseEntity.ok().body(serviceOperation.getServiceById(id));
     }
 
-    @PostMapping(ServiceURL.DECRYPT)
+    @PostMapping(ServiceURL.TEXT)
     public ResponseEntity<String> decryptText(@PathVariable String text) {
         return ResponseEntity.ok().body(serviceOperation.decryptText(text));
     }

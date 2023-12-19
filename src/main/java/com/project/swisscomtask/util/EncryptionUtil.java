@@ -16,16 +16,16 @@ import javax.crypto.spec.SecretKeySpec;
 @Component
 public class EncryptionUtil {
 
-    private String key = "1234567812345678";
-    private String initVector = "1234567812345678";
-    private String algorithm = "AES/CBC/PKCS5PADDING";
+    private static final String KEY = "1234567812345678";
+    private static final String INIT_VECTOR = "1234567812345678";
+    private static final String ALGORITHM = "AES/CBC/PKCS5PADDING";
 
     public String encrypt(String value) {
         try {
-            IvParameterSpec iv = new IvParameterSpec(initVector.getBytes(StandardCharsets.UTF_8));
-            SecretKeySpec skeySpec = new SecretKeySpec(key.getBytes(StandardCharsets.UTF_8), "AES");
+            IvParameterSpec iv = new IvParameterSpec(INIT_VECTOR.getBytes(StandardCharsets.UTF_8));
+            SecretKeySpec skeySpec = new SecretKeySpec(KEY.getBytes(StandardCharsets.UTF_8), "AES");
 
-            Cipher cipher = Cipher.getInstance(algorithm);
+            Cipher cipher = Cipher.getInstance(ALGORITHM);
             cipher.init(Cipher.ENCRYPT_MODE, skeySpec, iv);
 
             byte[] encrypted = cipher.doFinal(value.getBytes());
@@ -38,16 +38,16 @@ public class EncryptionUtil {
 
     public String decrypt(String encrypted) {
         try {
-            IvParameterSpec iv = new IvParameterSpec(initVector.getBytes(StandardCharsets.UTF_8));
-            SecretKeySpec skeySpec = new SecretKeySpec(key.getBytes(StandardCharsets.UTF_8), "AES");
+            IvParameterSpec iv = new IvParameterSpec(INIT_VECTOR.getBytes(StandardCharsets.UTF_8));
+            SecretKeySpec skeySpec = new SecretKeySpec(KEY.getBytes(StandardCharsets.UTF_8), "AES");
 
-            Cipher cipher = Cipher.getInstance(algorithm);
+            Cipher cipher = Cipher.getInstance(ALGORITHM);
             cipher.init(Cipher.DECRYPT_MODE, skeySpec, iv);
 
             byte[] original = cipher.doFinal(Base64.decodeBase64(encrypted));
             return new String(original);
         } catch (Exception ex) {
-            ex.printStackTrace();
+            log.error("The text can not be decrypted");
         }
         return null;
     }
