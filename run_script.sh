@@ -8,4 +8,4 @@ cd swisscom-task
 ./mvnw clean package
 
 # Run the application
-java -jar -Dspring.profiles.active=dev /path/to/swisscom-task.jar
+java -jar -Dspring.profiles.active=dev target/swisscom-task.jar
