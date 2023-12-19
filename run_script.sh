@@ -1,3 +1,5 @@
+# Command to run Redis container
+docker run -it --rm --name your_name -p 6379:6379 redis
 
 git clone https://github.com/Rediana11/swisscom-task/tree/master
 cd swisscom-task
